@@ -3,11 +3,6 @@
 ## What I Built
 A Python script that calls two Gemini models with the same prompt and compares their responses, token counts, latency, and cost.
 
-## How to Run
-1. `python3 -m venv venv && source venv/bin/activate`
-2. `pip install google-genai python-dotenv`
-3. Copy `.env.example` to `.env` and add your Gemini API key
-4. `python hw01_script.py`
 
 ## Cost Analysis
 
