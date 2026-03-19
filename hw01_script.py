@@ -1,8 +1,3 @@
-"""
-CS-AI-2025 | Lab 1 | Homework 1
-Spring 2026 | Kutaisi International University
-"""
-
 import os
 import time
 from dotenv import load_dotenv
