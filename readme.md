@@ -1,4 +1,4 @@
-# HW1 — CS-AI-2025 Spring 2026
+# HW1
 
 ## What I Built
 A Python script that calls two Gemini models with the same prompt and compares their responses, token counts, latency, and cost.
