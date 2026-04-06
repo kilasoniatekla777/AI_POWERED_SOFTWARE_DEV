@@ -6,11 +6,7 @@ from openai import OpenAI
 
 load_dotenv()
 
-# ---------------------------------------------------------------
-# OpenAI client (direct) — OpenRouter does NOT support
-# /v1/audio/speech or /v1/audio/transcriptions endpoints.
-# Use your OPENAI_API_KEY for audio calls.
-# ---------------------------------------------------------------
+
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
 )
@@ -20,7 +16,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 TEXT = "Machine learning models learn patterns from data and improve over time."
 
-# ----------- COST & LATENCY TRACKING -----------
+
 call_log = []
 tts_cost_total = 0.0
 stt_cost_total = 0.0
@@ -37,7 +33,7 @@ def log_call(call_type, model, latency, input_size, cost):
     })
 
 
-# ----------- RETRY WRAPPER -----------
+
 def api_call_with_retry(fn, retries=1, delay=2):
     for attempt in range(retries + 1):
         try:
@@ -50,7 +46,7 @@ def api_call_with_retry(fn, retries=1, delay=2):
                 raise
 
 
-# ----------- TTS -----------
+
 def tts_generate(text, voice, step_num, total_steps):
     global tts_cost_total
 
@@ -87,17 +83,17 @@ def tts_generate(text, voice, step_num, total_steps):
     return filename
 
 
-# ----------- AUDIO DURATION ESTIMATE -----------
+
 def get_audio_duration_seconds(file_path):
     """Estimate MP3 duration from file size (assumes ~128kbps)."""
     try:
         size_bytes = os.path.getsize(file_path)
-        return size_bytes / 16000  # 128kbps = 16000 bytes/sec
+        return size_bytes / 16000  
     except Exception:
         return 8.0
 
 
-# ----------- STT -----------
+
 def stt_transcribe(file_path, step_num, total_steps):
     global stt_cost_total
 
@@ -141,7 +137,7 @@ def stt_transcribe(file_path, step_num, total_steps):
     return text
 
 
-# ----------- COMPARISON -----------
+
 def compare_text(original, transcribed, step_num, total_steps):
     print(f"\n[{step_num}/{total_steps}] Comparing original vs transcribed text")
 
@@ -158,7 +154,7 @@ def compare_text(original, transcribed, step_num, total_steps):
     return accuracy
 
 
-# ----------- SUMMARY -----------
+
 def summary():
     print("\n=== Cost and Latency Summary ===")
 
@@ -181,7 +177,7 @@ def summary():
               f"latency={entry['latency_s']}s | input={entry['input_size']} | cost=${entry['cost_usd']:.6f}")
 
 
-# ----------- MAIN -----------
+
 def main():
     print("=== HW2 Audio Pipeline ===")
 
